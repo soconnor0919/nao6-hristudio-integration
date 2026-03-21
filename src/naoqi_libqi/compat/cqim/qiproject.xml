@@ -1,5 +1,0 @@
-<project version="3">
-  <qibuild name="libqimessaging">
-    <depends buildtime="true" runtime="true" names="libqi libqitype" />
-  </qibuild>
-</project>

@@ -1,0 +1,20 @@
+[submodule "src/naoqi_libqi"]
+	path = src/naoqi_libqi
+	url = https://github.com/ros-naoqi/libqi.git
+	branch = master
+[submodule "src/naoqi_libqicore"]
+	path = src/naoqi_libqicore
+	url = https://github.com/ros-naoqi/libqicore.git
+	branch = master
+[submodule "src/naoqi_bridge_msgs"]
+	path = src/naoqi_bridge_msgs
+	url = https://github.com/ros-naoqi/naoqi_bridge_msgs2.git
+	branch = main
+[submodule "src/naoqi_driver2"]
+	path = src/naoqi_driver2
+	url = https://github.com/ros-naoqi/naoqi_driver2.git
+	branch = main
+[submodule "src/nao_launch"]
+	path = src/nao_launch
+	url = git@github.com:soconnor0919/nao_launch.git
+	branch = master

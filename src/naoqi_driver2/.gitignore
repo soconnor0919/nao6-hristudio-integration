@@ -1,8 +1,0 @@
-build*
-doc/*
-!doc/source/*
-!doc/Doxyfile
-*.pro
-*.pro.user
-.colcon/
-.vscode/

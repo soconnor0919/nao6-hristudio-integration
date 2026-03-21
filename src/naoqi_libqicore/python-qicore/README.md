@@ -1,5 +1,0 @@
-QiCore
-
----
-
-QiCore Python Module.

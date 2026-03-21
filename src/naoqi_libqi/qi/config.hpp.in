@@ -1,2 +1,0 @@
-#cmakedefine qi_STATIC_BUILD
-#cmakedefine QI_WITH_TESTS
