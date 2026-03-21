@@ -27,6 +27,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /ws
+
+# Clone submodules if src/ is empty (happens when submodules aren't initialized on host)
+RUN if [ ! -f "src/naoqi_libqi/CMakeLists.txt" ]; then \
+        echo "Initializing git submodules..." && \
+        git clone --depth 1 https://github.com/ros-naoqi/libqi.git src/naoqi_libqi && \
+        cd src/naoqi_libqi && git submodule update --init --recursive && cd ../.. && \
+        git clone --depth 1 https://github.com/ros-naoqi/libqicore.git src/naoqi_libqicore && \
+        cd src/naoqi_libqicore && git submodule update --init --recursive && cd ../.. && \
+        git clone --depth 1 https://github.com/ros-naoqi/naoqi_bridge_msgs2.git src/naoqi_bridge_msgs && \
+        git clone --depth 1 https://github.com/ros-naoqi/naoqi_driver2.git src/naoqi_driver2 && \
+        git clone --depth 1 https://github.com/soconnor0919/nao_launch.git src/nao_launch; \
+    fi
+
 COPY src/ ./src/
 
 RUN bash -c "\

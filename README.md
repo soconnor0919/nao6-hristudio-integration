@@ -2,13 +2,30 @@
 
 Docker image for NAO6 robot control with HRIStudio.
 
-## Setup
+## Quick Start
 
 ```bash
-git clone --recursive <repo> nao6-hristudio-integration
+git clone --recurse-submodules https://github.com/soconnor0919/nao6-hristudio-integration.git
+cd nao6-hristudio-integration
+docker compose build
+NAO_IP=192.168.1.100 docker compose up -d
+```
+
+## Setup
+
+### Prerequisites
+- Docker and Docker Compose v2
+- NAO6 robot on same network
+
+### Clone with Submodules
+
+```bash
+git clone --recurse-submodules https://github.com/soconnor0919/nao6-hristudio-integration.git
 cd nao6-hristudio-integration
 docker compose build
 ```
+
+**Note:** If you cloned without `--recurse-submodules`, the Dockerfile will automatically download the required ROS packages on first build.
 
 ## Run
 
@@ -36,3 +53,14 @@ NAO_IP=192.168.1.100 docker compose up -d
 ```bash
 docker compose down
 ```
+
+## Troubleshooting
+
+### mDNS hostname not resolving
+If `nao.local` doesn't work, specify the IP directly:
+```bash
+NAO_IP=192.168.1.100 docker compose up
+```
+
+### Find your robot's IP
+On the robot, say "What is my IP address?" or check the robot's network settings.
