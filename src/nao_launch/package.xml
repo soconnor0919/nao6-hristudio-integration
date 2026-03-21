@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypeid="pf3"?>
+<package format="3">
+  <name>nao_launch</name>
+  <version>2.0.0</version>
+  <description>
+    Enhanced launch files and utilities for NAO6 HRIStudio integration.
+
+    This package provides comprehensive launch configurations for integrating NAO6 robots
+    with the HRIStudio platform, including production-ready launch files, monitoring tools,
+    safety features, and utility scripts for robot control and management.
+
+    Features:
+    - Production and enhanced launch configurations
+    - Automatic robot wake-up and safety monitoring
+    - ROS bridge WebSocket integration for HRIStudio
+    - Robot control and status monitoring scripts
+    - Comprehensive error handling and recovery
+    - Performance-optimized sensor publishing
+  </description>
+
+  <maintainer email="robolab@hristudio.com">HRIStudio RoboLab Team</maintainer>
+  <license>MIT</license>
+
+  <url type="website">https://github.com/hristudio/nao-integration</url>
+  <url type="bugtracker">https://github.com/hristudio/nao-integration/issues</url>
+  <url type="repository">https://github.com/hristudio/nao-integration</url>
+
+  <author email="robolab@hristudio.com">HRIStudio Team</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Core ROS2 dependencies -->
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>lifecycle_msgs</exec_depend>
+
+  <!-- NAOqi driver and related packages -->
+  <exec_depend>naoqi_driver</exec_depend>
+  <exec_depend>naoqi_bridge_msgs</exec_depend>
+
+  <!-- ROS bridge for HRIStudio WebSocket communication -->
+  <exec_depend>rosbridge_server</exec_depend>
+  <exec_depend>rosapi</exec_depend>
+
+  <!-- Standard message types -->
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+
+  <!-- Transform and robot state -->
+  <exec_depend>tf2</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+
+  <!-- Optional visualization -->
+  <exec_depend condition="$ROS_DISTRO == humble">rviz2</exec_depend>
+  <exec_depend condition="$ROS_DISTRO == humble">robot_localization</exec_depend>
+
+  <!-- System utilities -->
+  <exec_depend>python3-yaml</exec_depend>
+  <exec_depend>python3-psutil</exec_depend>
+
+  <!-- Testing dependencies -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>launch_testing</test_depend>
+  <test_depend>launch_testing_ament_cmake</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+
+    <!-- Declare launch file locations -->
+    <launch_prefix>launch</launch_prefix>
+
+    <!-- Specify compatible robot platforms -->
+    <robot_platform>nao6</robot_platform>
+    <robot_platform>pepper</robot_platform>
+
+    <!-- Integration metadata -->
+    <integration_type>hristudio</integration_type>
+    <communication_protocol>rosbridge</communication_protocol>
+    <ros_distro>humble</ros_distro>
+
+    <!-- Feature flags -->
+    <supports_safety_monitoring>true</supports_safety_monitoring>
+    <supports_auto_wakeup>true</supports_auto_wakeup>
+    <supports_emergency_stop>true</supports_emergency_stop>
+    <supports_sensor_monitoring>true</supports_sensor_monitoring>
+  </export>
+</package>

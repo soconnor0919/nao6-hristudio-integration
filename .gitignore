@@ -1,0 +1,15 @@
+# Build artifacts
+build/
+install/
+log/
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
