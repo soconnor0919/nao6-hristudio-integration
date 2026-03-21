@@ -3,20 +3,28 @@ services:
     build: .
     network_mode: host
     ipc: host
-    environment:
-      - NAO_IP=${NAO_IP:-nao.local}
-      - NAO_PASSWORD=${NAO_PASSWORD:-robolab}
-      - NAO_USERNAME=${NAO_USERNAME:-nao}
-    command: ["bash", "-c", "source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && ros2 run naoqi_driver naoqi_driver_node --ros-args -p nao_ip:=${NAO_IP} -p nao_port:=9559 -p user:=${NAO_USERNAME} -p password:=${NAO_PASSWORD}"]
+    env_file:
+      - .env
+    command: >
+      bash -c 'source /opt/ros/humble/setup.bash && source /ws/install/setup.bash
+      && ros2 run naoqi_driver naoqi_driver_node --ros-args
+      -p nao_ip:=${NAO_IP}
+      -p nao_port:=9559
+      -p user:=${NAO_USERNAME}
+      -p password:=${NAO_PASSWORD}'
 
   ros_bridge:
     build: .
     network_mode: host
-    environment:
-      - BRIDGE_PORT=${BRIDGE_PORT:-9090}
-    command: ["bash", "-c", "source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && ros2 run rosbridge_server rosbridge_websocket --ros-args -p port:=${BRIDGE_PORT}"]
+    env_file:
+      - .env
+    command: >
+      bash -c 'source /opt/ros/humble/setup.bash && source /ws/install/setup.bash
+      && ros2 run rosbridge_server rosbridge_websocket --ros-args -p port:=${BRIDGE_PORT}'
 
   ros_api:
     build: .
     network_mode: host
-    command: ["bash", "-c", "source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && ros2 run rosapi rosapi_node"]
+    command: >
+      bash -c 'source /opt/ros/humble/setup.bash && source /ws/install/setup.bash
+      && ros2 run rosapi rosapi_node'
