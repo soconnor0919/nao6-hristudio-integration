@@ -25,7 +25,7 @@ cd nao6-hristudio-integration
 docker compose build
 ```
 
-**Note:** If you cloned without `--recurse-submodules`, the Dockerfile will automatically download the required ROS packages on first build.
+**Note:** If you cloned without `--recurse-submodules`, the ROS packages will still be downloaded automatically on first build.
 
 ## Run
 

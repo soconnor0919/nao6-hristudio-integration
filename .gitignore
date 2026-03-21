@@ -3,9 +3,6 @@ build/
 install/
 log/
 
-# Docker
-.dockerignore
-
 # IDE
 .vscode/
 .idea/
