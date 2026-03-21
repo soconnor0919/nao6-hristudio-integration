@@ -5,7 +5,7 @@ services:
     ipc: host
     env_file:
       - .env
-    command: ["bash", "-c", "python3 /ws/scripts/init_robot.py --ip ${NAO_IP} && source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && ros2 run naoqi_driver naoqi_driver_node --ros-args -p nao_ip:=${NAO_IP} -p nao_port:=9559 -p user:=${NAO_USERNAME} -p password:=${NAO_PASSWORD}"]
+    command: ["bash", "-c", "/ws/scripts/init_robot.sh && source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && ros2 run naoqi_driver naoqi_driver_node --ros-args -p nao_ip:=${NAO_IP} -p nao_port:=9559 -p user:=${NAO_USERNAME} -p password:=${NAO_PASSWORD}"]
 
   ros_bridge:
     build: .

@@ -14,7 +14,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sshpass \
     libboost-all-dev \
     libeigen3-dev \
-    python3-pip \
     ros-humble-rosbridge-server \
     ros-humble-rosapi \
     ros-humble-cv-bridge \
@@ -27,15 +26,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-humble-naoqi-bridge-msgs \
     && rm -rf /var/lib/apt/lists/*
 
-# Install naoqi Python SDK for robot initialization
-RUN pip3 install --no-cache-dir naoqi
-
 WORKDIR /ws
 
 COPY src/ ./src/
 COPY scripts/ ./scripts/
 
-RUN chmod +x /ws/scripts/init_robot.py
+RUN chmod +x /ws/scripts/init_robot.sh
 
 RUN bash -c "\
     source /opt/ros/${ROS_DISTRO}/setup.bash && \
