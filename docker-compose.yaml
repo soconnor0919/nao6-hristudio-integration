@@ -1,21 +1,45 @@
 services:
   nao_driver:
-    build: .
+    build:
+      context: .
+      args:
+        ROS_DISTRO: humble
     network_mode: host
     ipc: host
     env_file:
       - .env
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '4'
     command: ["bash", "-c", "/ws/scripts/init_robot.sh && source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && ros2 run naoqi_driver naoqi_driver_node --ros-args -p nao_ip:=${NAO_IP} -p nao_port:=9559 -p user:=${NAO_USERNAME} -p password:=${NAO_PASSWORD}"]
 
   ros_bridge:
-    build: .
+    build:
+      context: .
+      args:
+        ROS_DISTRO: humble
     network_mode: host
     ipc: host
     env_file:
       - .env
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1'
     command: ["bash", "-c", "source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && ros2 run rosbridge_server rosbridge_websocket --ros-args -p port:=${BRIDGE_PORT}"]
 
   ros_api:
-    build: .
+    build:
+      context: .
+      args:
+        ROS_DISTRO: humble
     network_mode: host
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1'
     command: ["bash", "-c", "source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && ros2 run rosapi rosapi_node"]
